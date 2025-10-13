@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JAVA와 DB의 연결 관리를 위한 설정 및 구성 정보 -->
+
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+
+    <!-- 퍼시스턴스 유닛 이름 -->
+    <persistence-unit name="jpabook">
+
+        <!-- JDBC 설정 -->
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/> <!-- 드라이버 정보 -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/> <!-- Connection DB URl -->
+            <property name="jakarta.persistence.jdbc.user" value="sa"/> <!-- DB user(role) -->
+            <property name="jakarta.persistence.jdbc.password" value=""/> <!-- DB role Password -->
+            <!-- Hibernate 방언(Dialect) -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+
+            <!-- 테이블 자동 생성 옵션 -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+
+            <!-- SQL 출력 -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.id.new_generator_mapping" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
