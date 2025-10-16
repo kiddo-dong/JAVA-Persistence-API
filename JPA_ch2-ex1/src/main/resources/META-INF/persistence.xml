@@ -12,7 +12,7 @@
         <!-- JDBC 설정 -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/> <!-- 드라이버 정보 -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/> <!-- Connection DB URl -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/><!-- Connection DB URl -->
             <property name="jakarta.persistence.jdbc.user" value="sa"/> <!-- DB user(role) -->
             <property name="jakarta.persistence.jdbc.password" value=""/> <!-- DB role Password -->
             <!-- Hibernate 방언(Dialect) -->
