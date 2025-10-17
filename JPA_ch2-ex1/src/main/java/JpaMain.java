@@ -78,21 +78,49 @@ public class JpaMain {
         // test 인스턴스
         // API 개발시 DTO 또는 객체를 넣음
         // Controller에서 REST API 요청 받아옴. MemberRequestDto(username, age), Member, Front에 리턴 시 MemberResponseDto(username, age)
+
+        // 객체 생성 logic
         String id = "id1";
         Member member = new Member();
         member.setId(id);
         member.setUsername("지한");
         member.setAge(2);
-        
+
+        // 객체 EntityManager em
+
         // C (등록)
+        // em의 영속성 컨텍스트의 1차 캐시(Map<>)에 member객체 등록
+        // Heap | em -> PersistenceCon0text -> 1차 Cache Map{ id1 : member }
+        // persist() 메소드 호출 시 영속성 컨텍스트에만 올림
+        // 즉, 메모리 Heap의 1차캐시에서 유지중 | INSERT 쿼리를 DB에 보내지 않음
+        // EntityManager 즉 em은 영속성 컨텍스트의 내부 쿼리 저장소에 INSERT SQL을 모아 놓음
+        // 영속성 컨텍스트 - 쓰기 지연 SQL 저장소
         em.persist(member);
-        
+
+        // 쓰기 지연
+        // commit(), flush() 메소드 호출시에 INSERT 쿼리 날림
+        // tx.commit();
+        // em.flush();
+
         // U (수정)
+        //
         member.setAge(20);
         
         // R (조회)
+        // find() 메소드 구조
+        // public <T> T find(Class<T> entityClass, Object primaryKey);
+        // 리턴 타입 : <T>
+        // 첫 번째 파라미터 : 리턴 타입 지정 및 1차캐시 존재여부 확인 후 DB에서 찾음
+        // 두 번째 파라미터 : find 할 엔티티의 PK
+        //===================================================
+        // find() 메소드 흐름 
+        // find() 호출 시 영속성 컨텍스트이 1차 캐시에서 조회
+        // 존재하면 인스턴스 가져옴
+        // 존재하지 않으면 DB에 쿼리 날려서 1차 캐시에 올리고 가져옴
+        //===================================================
+        // 1차 캐시가 존재하므로 동일성 조회가 가능 (힙 비교)
         Member findMember = em.find(Member.class, id); // id로 조회 및 Member.class 엔티티로 매핑해서 리턴
-        System.out.println("한 건 조회  id : " + findMember.getId() +"\nname : " + findMember.getUsername() + "\nage : " +findMember.getAge());
+        System.out.println("Object 조회  id : " + findMember.getId() +"\nname : " + findMember.getUsername() + "\nage : " +findMember.getAge());
 
         // R (목록 조회)
         List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
@@ -101,7 +129,6 @@ public class JpaMain {
         // D (삭제)
         em.remove(member);
     }
-
 }
 /*
         Connection connection = DriverManager.getConnection("","","");
