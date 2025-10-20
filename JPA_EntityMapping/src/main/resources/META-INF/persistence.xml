@@ -7,7 +7,7 @@
              version="3.1">
 
     <!-- 영속성 유닛 이름 -->
-    <persistence-unit name="jpabook">
+    <persistence-unit name="persistence">
 
         <!-- JDBC 설정 -->
         <properties>

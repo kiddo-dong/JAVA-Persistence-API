@@ -37,29 +37,16 @@ public class JpaMain {
         // ===== 트랜잭션 관리 부분 =====
         try {
             tx.begin(); // 트랜잭션 시작
-            /*
-            String id = "id1";
             Member member = new Member();
-            member.setId(id);
-            member.setUsername("지한");
-            member.setAge(2);
-            // C (등록)
-            em.persist(member);
-            // U (수정)
+            member.setId("2");
+            member.setUsername("test");
             member.setAge(20);
-            // R (조회)
-            Member findMember = em.find(Member.class, id); // id로 조회 및 Member.class 엔티티로 매핑해서 리턴
-            System.out.println("한 건 조회  id : " + findMember.getId() +"\nname : " + findMember.getUsername() + "\nage : " +findMember.getAge());
-            // R (목록 조회)
-            List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
-            System.out.println("members size : " + members.size());
-            // D (삭제)
-            em.remove(member);
-            */
+
+            em.persist(member); // 영속
+            // em.detach(member); // 준영속(영속성 분리)
+            // em.clear(); // 영속성 컨텍스트 초기화 (준영속)
 
             logic(em); // service logic(bussiness logic 메소드 호출)
-
-
             tx.commit(); // 트랜잭션 커밋
             
         } catch (Exception e){ // 트랜잭션 중 오류 나면 rollback
@@ -96,16 +83,25 @@ public class JpaMain {
         // EntityManager 즉 em은 영속성 컨텍스트의 내부 쿼리 저장소에 INSERT SQL을 모아 놓음
         // 영속성 컨텍스트 - 쓰기 지연 SQL 저장소
         em.persist(member);
-
+        System.out.println("==========================================");
+        System.out.println();
         // 쓰기 지연
         // commit(), flush() 메소드 호출시에 INSERT 쿼리 날림
         // tx.commit();
         // em.flush();
 
         // U (수정)
-        //
+        // persist() 수행 시 1차캐시에 pk, entity와 snapshot(객체 원본 값) 저장
+        // setter() 로 엔티티 값을 변경하면 entity
+        // 즉, entity에 해당하는 힙의 필드가 변경됨
+        // flush() 호출하면 영속성 컨텍스트의
+        // 1차 캐시 내부에서 entity(변경된 entity의 필드값)와 snapshot(객체 원본 값) 동등성 비교
+        // 값이 변경되었다면 UPDATE 문 생성 후 쓰기 지연 SQL 저장소에 쿼리 생성
+        // 값이 변경되지 않았다면 그내로 flush()
         member.setAge(20);
-        
+        System.out.println("==========================================");
+        System.out.println();
+
         // R (조회)
         // find() 메소드 구조
         // public <T> T find(Class<T> entityClass, Object primaryKey);
@@ -115,16 +111,21 @@ public class JpaMain {
         //===================================================
         // find() 메소드 흐름 
         // find() 호출 시 영속성 컨텍스트이 1차 캐시에서 조회
-        // 존재하면 인스턴스 가져옴
+        // 존재하면 인스턴스 가져옴(1차 캐시의 Map에서 find)
         // 존재하지 않으면 DB에 쿼리 날려서 1차 캐시에 올리고 가져옴
         //===================================================
         // 1차 캐시가 존재하므로 동일성 조회가 가능 (힙 비교)
         Member findMember = em.find(Member.class, id); // id로 조회 및 Member.class 엔티티로 매핑해서 리턴
-        System.out.println("Object 조회  id : " + findMember.getId() +"\nname : " + findMember.getUsername() + "\nage : " +findMember.getAge());
+        System.out.println("Object 조회\nid : " + findMember.getId() +"\nname : " + findMember.getUsername() + "\nage : " +findMember.getAge());
+        System.out.println("==========================================");
+        System.out.println();
 
         // R (목록 조회)
+        // JPQL 쿼리를 직접 짜서 쓰기 지연 SQL 저장소에 저장
         List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
         System.out.println("members size : " + members.size());
+        System.out.println("==========================================");
+        System.out.println();
 
         // D (삭제)
         em.remove(member);
