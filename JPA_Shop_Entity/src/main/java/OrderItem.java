@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class OrderItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // DB AUTO_INCREMENT 위임
     private Long order_item_id;
 
     private Long order_id;

@@ -5,7 +5,7 @@
                                  https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
              version="3.1">
 
-    <persistence-unit name="MySQLPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="PersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <!-- JPA Entity 패키지 지정 -->
         <class>com.example.domain.Member</class>
         <class>com.example.domain.Team</class>
