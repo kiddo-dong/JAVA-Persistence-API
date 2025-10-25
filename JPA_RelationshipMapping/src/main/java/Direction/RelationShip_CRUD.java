@@ -13,48 +13,27 @@ public class RelationShip_CRUD {
     // CRUD Method (JPA & Persistence context)
 
     // persist()
-    public void testSave(){
+    public void testSave() {
 
-        Team team1 = new Team("team", "팀1");
-
-        try {
-            tx.begin();
-
-            em.persist(team1);
-
-            tx.commit();
-        } catch (NoResultException e){
-            tx.rollback();
-        }
+        Team team1 = new Team("team1", "팀1");
 
         Member member1 = new Member("member1", "회원1");
-        member1.setTeam(team1); // Member의 필드에 team1인스턴스 주입
-        try {
-            tx.begin();
-
-            em.persist(member1);
-
-            tx.commit();
-        } catch (NoResultException e){
-            tx.rollback();
-        }
+        member1.setTeam(team1);
 
         Member member2 = new Member("member2", "회원2");
         member2.setTeam(team1);
+
         try {
             tx.begin();
 
+            em.persist(team1); //
+            em.persist(member1);
             em.persist(member2);
 
             tx.commit();
-        } catch (NoResultException e){
+        } catch (NoResultException e) {
             tx.rollback();
         }
-
-        em.close();
-        emf.close();
     }
 
-
-    //
 }

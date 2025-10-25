@@ -16,7 +16,7 @@ public class Member {
     private String username;
 
     // Team 객체 참조
-    // 즉, Team의 참조를 보관하는 필드 객체*
+    // 즉, Team의 참조를 보관하는 필드 객체
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;

@@ -28,7 +28,7 @@ public class Main {
         // CRUD
         RelationShip_CRUD crud = new RelationShip_CRUD();
 
-        // crud.testSave(); // persist()
+        crud.testSave(); // persist()
 
 
 
