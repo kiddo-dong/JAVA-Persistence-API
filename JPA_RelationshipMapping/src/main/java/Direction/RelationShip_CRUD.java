@@ -12,7 +12,7 @@ public class RelationShip_CRUD {
     // 연관 관계 매핑
     // CRUD Method (JPA & Persistence context)
 
-    // persist()
+    // persist() | Create
     public void testSave() {
 
         Team team1 = new Team("team1", "팀1");

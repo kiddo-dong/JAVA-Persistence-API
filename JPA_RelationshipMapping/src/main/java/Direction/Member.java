@@ -17,6 +17,8 @@ public class Member {
 
     // Team 객체 참조
     // 즉, Team의 참조를 보관하는 필드 객체
+    // JoinColum으로 FK를 제대로 매핑해주지 않으면
+    // 해당 속성이 DB에서 비어있게 된다 즉 의존하는 객체를 먼저 만들어 줘야한다.
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
