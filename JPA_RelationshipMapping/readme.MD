@@ -7,7 +7,7 @@
     - 단방향 : A객체 에서 B객체(@Id) 참조</br>
     - 양방향 : A객체 B객체가 서로의 @Id(PK) 참조. 즉, 단방향 참조가 2개로 이루어짐.</br>
 - 다중성 (관계의 형태 1:1, 1:N, N:1, N:N)</br>
-  - 1:1(한 Entity - 한 Entity) : @OneToOne</br>
+ - 1:1(한 Entity - 한 Entity) : @OneToOne</br>
   - 1:N(한 Entity - 여러 Entity) : @OneToMany</br>
   - N:1(여러 Entity - 한 Entity) : @ManyToOne</br>
   - N:N(여러 Entity - 여러 Entity) : @ManyToMany</br>
