@@ -15,6 +15,8 @@ public class Team {
     @Column(name = "NAME")
     private String name;
 
+    protected Team(){}
+
     public Team(String id, String name) {
         this.id = id;
         this.name = name;

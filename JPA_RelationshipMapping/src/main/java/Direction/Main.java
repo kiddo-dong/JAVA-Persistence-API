@@ -28,11 +28,15 @@ public class Main {
         // CRUD
         RelationShip_CRUD crud = new RelationShip_CRUD();
 
-        crud.testSave(); // persist()
+        // crud.testSave(); // persist()
 
+        // crud.queryLogicJoin();
 
+        // crud.update();
 
+        // update 후 다시 팀1을 호출하면 DB의 데이터 즉 도동동1의 데이터가 변경된것을 확인 할 수 있음
+        //crud.queryLogicJoin();
+
+        crud.delete();
     }
-
-
 }
