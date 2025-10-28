@@ -35,8 +35,9 @@ public class Main {
         // crud.update();
 
         // update 후 다시 팀1을 호출하면 DB의 데이터 즉 도동동1의 데이터가 변경된것을 확인 할 수 있음
-        //crud.queryLogicJoin();
+        // crud.queryLogicJoin();
 
-        crud.delete();
+        // crud.delete();
+        // crud.biDirection();
     }
 }

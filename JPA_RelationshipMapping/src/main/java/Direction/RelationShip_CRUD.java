@@ -104,4 +104,13 @@ public class RelationShip_CRUD {
         }
     }
 
+    public void biDirection(){
+        Team team = em.find(Team.class, "team1");
+        List<Member> members = team.getMembers();
+
+        for(Member member : members) {
+            System.out.println("members : " + member.getUsername());
+        }
+    }
+
 }

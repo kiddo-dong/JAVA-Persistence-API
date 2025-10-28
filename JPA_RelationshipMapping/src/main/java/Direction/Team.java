@@ -1,9 +1,9 @@
 package Direction;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "team")
@@ -14,6 +14,9 @@ public class Team {
 
     @Column(name = "NAME")
     private String name;
+
+    @OneToMany(mappedBy = "team") // field명 지정
+    private List<Member> members = new ArrayList<>();
 
     protected Team(){}
 
@@ -36,5 +39,13 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Member> members) {
+        this.members = members;
     }
 }

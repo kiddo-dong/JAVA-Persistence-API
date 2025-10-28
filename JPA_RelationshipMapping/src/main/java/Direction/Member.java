@@ -20,7 +20,7 @@ public class Member {
     // JoinColum으로 FK를 제대로 매핑해주지 않으면
     // 해당 속성이 DB에서 비어있게 된다 즉 의존하는 객체를 먼저 만들어 줘야한다.
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
+    @JoinColumn(name = "TEAM_ID") // 외래키가 존재하는 Member 객체가 Owner가 됨
     private Team team;
 
     protected Member(){}
@@ -51,6 +51,10 @@ public class Member {
     }
 
     public void setTeam(Team team) {
+        if(this.team != null){
+           this.team.getMembers().remove(this);
+        }
         this.team = team;
+        team.getMembers().add(this);
     }
 }

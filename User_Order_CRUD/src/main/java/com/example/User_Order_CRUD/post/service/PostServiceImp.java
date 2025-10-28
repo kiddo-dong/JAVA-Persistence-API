@@ -41,8 +41,7 @@ public class PostServiceImp implements PostService{
 
     @Override
     public PostResponseDto findPostById(Long postId) {
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글 없음: " + postId));
+        Post post = postRepository.findById(postId);
 
         return new PostResponseDto(
                 post.getId(),
@@ -55,16 +54,14 @@ public class PostServiceImp implements PostService{
 
     @Override
     public boolean verifyPostOwner(Long postId, Long userId) {
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글 없음: " + postId));
+        Post post = postRepository.findById(postId);
 
         return post.getUser().getId().equals(userId);
     }
 
     @Override
     public boolean updatePost(Long postId, PostRequestDto requestDto, Long userId) {
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글 없음: " + postId));
+        Post post = postRepository.findById(postId);
 
         if(!post.getUser().getId().equals(userId)){
             return false; // 권한 없음
@@ -78,8 +75,7 @@ public class PostServiceImp implements PostService{
 
     @Override
     public boolean deletePost(Long postId, Long userId) {
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글 없음: " + postId));
+        Post post = postRepository.findById(postId);
 
         if(!post.getUser().getId().equals(userId)){
             return false; // 권한 없음
