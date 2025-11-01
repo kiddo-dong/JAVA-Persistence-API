@@ -9,9 +9,9 @@ public class Post {
 
     public Post(){};
 
-    public Post(String content, String title) {
-        this.content = content;
+    public Post(String title, String content) {
         this.title = title;
+        this.content = content;
     }
 
     @Id

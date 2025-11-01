@@ -9,9 +9,9 @@ public class User {
 
     public User(){};
 
-    public User(int age, String name) {
-        this.age = age;
+    public User(String name,int age) {
         this.name = name;
+        this.age = age;
     }
 
     @Id
@@ -51,6 +51,14 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     public void addPost(Post post){
