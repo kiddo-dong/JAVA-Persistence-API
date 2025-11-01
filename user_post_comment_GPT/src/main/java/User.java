@@ -3,33 +3,29 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// User 엔티티
 @Entity
 @Table(name = "users")
 public class User {
 
     public User(){};
 
-    // Id는 자동생성, 게시물은 Setter로 연관관계를 맺으므로 생성자 X
-    public User(String name, int age) {
-        this.name = name;
+    public User(int age, String name) {
         this.age = age;
+        this.name = name;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "USER_ID")
     private Long id;
+
     @Column(name = "NAME")
     private String name;
+
     @Column(name = "AGE")
     private int age;
 
-    /* 리스트를 필드로 만드는 이유
-       양방향 참조를 해주기 위해서
-       개념적 설계에서 유저는 여러 게시물을 가지기 때문에 List로 참조해서 받아옴
-       Post에서 해당 엔티티를 user로 참조중
-    */
+    // 양방향 Mapping
     @OneToMany(mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
 
@@ -57,18 +53,11 @@ public class User {
         this.age = age;
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
     public void addPost(Post post){
+        // 유저에 게시물 추가
         posts.add(post);
-        post.setUser(this); // post 엔티티의 객체에도 user넣어줌
-        
-        // 1차 캐시에 등록을 해줄때 객체를 참조한채로 등록해줌
+        // 게시물에 유저 인스턴스 객체 관계
+        post.setUser(this);
     }
+
 }

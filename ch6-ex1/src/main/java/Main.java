@@ -30,6 +30,3 @@ public class Main {
         em.persist(post2);
     }
 }
-
-캐시가 뭔지 물어보기
-텍스트로 출력이되는ㄱ데 어떯데 충력된느
