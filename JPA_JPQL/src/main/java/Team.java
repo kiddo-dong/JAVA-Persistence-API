@@ -6,16 +6,21 @@ import java.util.List;
 @Entity
 @Table(name = "TEAM")
 public class Team {
+
+    public Team(){};
+
+    public Team(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TEAM_ID")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "TEAM_NAME")
+    @Column(name = "NAME")
     private String name;
 
-    // 팀 객체를 조회하면 Member 객체들은 지연로딩으로 인해 호출하지 않으면 SQL을 날리지 않음 즉, 헤당 인스턴스는 프록시로 존재
-    // OneToMany는기본적으로 LAZY를 사용중
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
     private List<Member> members = new ArrayList<>();
 
@@ -41,5 +46,9 @@ public class Team {
 
     public void setMembers(List<Member> members) {
         this.members = members;
+    }
+
+    public void add(Member member){
+        members.add(member);
     }
 }

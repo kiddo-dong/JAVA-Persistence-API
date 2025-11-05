@@ -12,6 +12,7 @@ public class Member {
     private String name;
 
     // 멤버의 인스턴스 데이터를 조회하면 Team까지 쿼리를 날림 즉시 로딩
+    // 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
