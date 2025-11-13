@@ -69,12 +69,10 @@ public class Main {
             System.out.println("Member Count : "  + memberCount);
             */
 
-            /*
             String jqpl = "delete from Member m where m.id = :id";
             em.createQuery(jqpl)
                             .setParameter("id", 1L)
                             .executeUpdate();
-            */
 
 
             tx.commit(); // DB 저장
