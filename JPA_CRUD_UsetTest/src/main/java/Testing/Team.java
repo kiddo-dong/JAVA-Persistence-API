@@ -1,10 +1,12 @@
+package Testing;
+
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Team")
+@Table(name = "Testing.Team")
 public class Team {
 
     protected Team(){};

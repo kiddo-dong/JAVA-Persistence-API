@@ -1,34 +1,20 @@
-import jakarta.persistence.*;
-
-import java.util.List;
+import Testing.User;
 
 public class Main {
     public static void main(String[] args) {
-        // EntityManager & Persistence Context (JPA)
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+        // Data Access Layer
+        // Persistence Test
 
-        try{
-            tx.begin();
+        // Object _init_
+        MemberRepository memberRepository = new MemberRepository();
 
-            User user = em.find(User.class, 1);
-            System.out.println(user.getId() + " | " + user.getName()+ " | "+ user.getAge());
+        User user = new User("최동현", "24");
 
-            Team team = em.find(Team.class,1);
-            System.out.println(team.getName());
-            List<User> users = team.getUsers();
-            // 전체 출력
-            for(User u : users) {
-                System.out.println(" |   " + u.getName() + "  | ");
-            }
-            // DB에 쿼리 날림 및 Flush()
-            tx.commit();
-        } catch (NoResultException e){
+        // 저장 확인
+        memberRepository.save(user);
 
-        } finally {
-            em.close();
-        }
-        emf.close();
+
+
+
     }
 }

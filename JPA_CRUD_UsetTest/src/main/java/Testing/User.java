@@ -1,5 +1,6 @@
+package Testing;
+
 import jakarta.persistence.*;
-import org.hibernate.annotations.CollectionId;
 
 @Entity
 @Table(name = "USER")
@@ -57,15 +58,15 @@ public class User {
 
     public void setTeam(Team team) {
 
-        // Team 초기화 -> null
+        // Testing.Team 초기화 -> null
         if (this.team != null) {
             this.team.getUsers().remove(this);
         }
 
-        // User Join Team
+        // Testing.User Join Testing.Team
         this.team = team;
 
-        // Team join User
+        // Testing.Team join Testing.User
         if (team != null) {
             team.getUsers().add(this);
         }
