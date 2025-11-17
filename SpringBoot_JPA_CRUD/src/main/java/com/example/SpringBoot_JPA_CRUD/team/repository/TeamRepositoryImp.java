@@ -4,6 +4,7 @@ import com.example.SpringBoot_JPA_CRUD.team.Entity.Team;
 import com.example.SpringBoot_JPA_CRUD.team.dto.TeamResponseDto;
 import com.example.SpringBoot_JPA_CRUD.team.dto.TeamWithUserResponseDto;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -25,11 +26,19 @@ public class TeamRepositoryImp implements TeamRepository{
     // 팀 & 팀의 유저
     @Override
     public Team findByName(String name) {
-        String jpql = "SELECT t FROM Team t LEFT JOIN FETCH t.users WHERE t.name = :name";
+        String jpql = "SELECT DISTINCT t FROM Team t LEFT JOIN FETCH t.users WHERE t.name = :name";
         List<Team> result = em.createQuery(jpql, Team.class)
                 .setParameter("name", name)
                 .getResultList();
         return result.isEmpty() ? null : result.get(0);
+    }
+
+    @Override
+    public Team findOnlyTeam(String name){
+        String jpql = "select t from Team t where t.name = :name";
+        return em.createQuery(jpql,Team.class)
+                .setParameter("name", name)
+                .getSingleResult();
     }
 
     // 전체 팀 목록
@@ -43,11 +52,15 @@ public class TeamRepositoryImp implements TeamRepository{
     }
 
     @Override
-    public Team updateTeamName(String name) {
-       String jpql = "SELECT t FROM Team t WHERE t.name = :name";
-       return em.createQuery(jpql, Team.class)
-               .setParameter("name", name)
-               .getSingleResult();
+    public Team updateByName(String name) {
+        try {
+            String jpql = "SELECT t FROM Team t WHERE t.name = :name";
+            return em.createQuery(jpql, Team.class)
+                    .setParameter("name", name)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override

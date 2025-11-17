@@ -14,6 +14,8 @@ import java.util.List;
 @Setter
 public class Team {
 
+    protected Team(){}
+
     public Team(String name) {
         this.name = name;
     }

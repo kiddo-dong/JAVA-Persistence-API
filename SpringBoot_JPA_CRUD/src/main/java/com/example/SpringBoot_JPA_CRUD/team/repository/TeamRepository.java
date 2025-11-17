@@ -14,11 +14,13 @@ public interface TeamRepository {
     //R
     // find Team & Team's User(Team 검색용)
     Team findByName(String name);
+    // find Object
+    Team findOnlyTeam(String name);
     // find TeamList
     List<TeamResponseDto> findAll();
 
     // U
-    Team updateTeamName(String name);
+    Team updateByName(String name);
 
     // D
     void deleteTeam(Team team);

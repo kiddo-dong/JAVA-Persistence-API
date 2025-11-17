@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public class User {
 
+    public User(){}
+
     public User(String name, Integer age, Team team) {
         this.name = name;
         this.age = age;
@@ -35,6 +37,9 @@ public class User {
         private Team team;
 
         public void setTeam(Team team){
+            if(this.team != null){
+                this.team.getUsers().remove(this);
+            }
             this.team = team;
             team.adduser(this);
         }
