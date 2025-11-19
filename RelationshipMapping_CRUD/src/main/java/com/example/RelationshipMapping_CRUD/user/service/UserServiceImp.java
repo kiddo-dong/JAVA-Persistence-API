@@ -29,7 +29,7 @@ public class UserServiceImp implements UserService{
 
     @Override
     public String addUser(UserRequestDto userRequestDto) {
-        User user =userMapper.toEntity(userRequestDto);
+        User user = userMapper.toEntity(userRequestDto);
         userRepository.addUser(user);
 
         return "생성되었습니다.";
@@ -43,6 +43,7 @@ public class UserServiceImp implements UserService{
         }
         return userMapper.toResponseDto(user);
     }
+
 
     @Override
     public List<UserResponseDto> findAll(Long id) {
@@ -62,7 +63,7 @@ public class UserServiceImp implements UserService{
                 user.setAge(userRequestDto.getAge());
             }
             if(userRequestDto.getTeamName() != null){
-                Team team = (teamRepository.findByName(user.getTeam()));
+                Team team = (teamRepository.findByName(userRequestDto.getTeamName()));
                 if(team != null){
                     user.setTeam(team);
                 } else {
@@ -72,9 +73,26 @@ public class UserServiceImp implements UserService{
         }else {
             return "User가 존재하지 않아 업데이트 할 수 없습니다.";
         }
-
         return "업데이트 완료!";
     }
+
+    public String updateUserMapStruct(Long id, UserRequestDto userRequestDto){
+        User user = userRepository.findById(id);
+        if(user != null){
+            // 새로 지정한 Team이 있다면
+            if(userRequestDto.getTeamName() != null){
+                // 팀 찾아서 user 객체에 주입
+                Team team = teamRepository.findByName(userRequestDto.getTeamName());
+                user.setTeam(team);
+            }
+            userMapper.updateUserFromRequestDto(userRequestDto, user);
+        } else {
+            return "User가 존재하지 않아 업데이트 할 수 없습니다.";
+        }
+        return "업데이트 완료";
+    }
+
+
 
     @Override
     public String deleteUser(Long id) {
