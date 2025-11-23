@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Mac Mini git
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
