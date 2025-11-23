@@ -1,4 +1,4 @@
-package com.example.JPA_Springboot.springdatajpa.repository;
+package com.example.JPA_Springboot.testing.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

@@ -1,6 +1,6 @@
-package com.example.JPA_Springboot.springdatajpa.repository;
+package com.example.JPA_Springboot.testing.repository;
 
-import com.example.JPA_Springboot.entity.Member;
+import com.example.JPA_Springboot.testing.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

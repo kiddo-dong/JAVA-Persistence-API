@@ -1,4 +1,4 @@
-package com.example.JPA_Springboot.entity;
+package com.example.JPA_Springboot.testing.entity;
 
 import jakarta.persistence.*;
 
@@ -12,6 +12,8 @@ public class Team {
 
     @Column(name = "name")
     private String name;
+
+
 
     public Long getId() {
         return id;

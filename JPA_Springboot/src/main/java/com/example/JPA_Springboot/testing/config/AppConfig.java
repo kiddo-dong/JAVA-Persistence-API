@@ -1,4 +1,4 @@
-package com.example.JPA_Springboot.config;
+package com.example.JPA_Springboot.testing.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
