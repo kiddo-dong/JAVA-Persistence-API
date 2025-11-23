@@ -45,7 +45,7 @@ public class UserServiceImp implements UserService{
                 .orElseThrow(() -> new RuntimeException("NOT FOUND"));
         if(userRequestDto != null){
             userMapper.updateUserFromDto(userRequestDto, user);
-            return "업뎃 완";
+            return "업뎃 완료";
         } else {
             return "";
         }
@@ -53,6 +53,11 @@ public class UserServiceImp implements UserService{
 
     @Override
     public String deleteById(Long id) {
-        return "";
+        if(userRepository.findById(id) != null){
+            userRepository.deleteById(id);
+            return "삭제 완료";
+        } else {
+            return "존재하지 않음";
+        }
     }
 }

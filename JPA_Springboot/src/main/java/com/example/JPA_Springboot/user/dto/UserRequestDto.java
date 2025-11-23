@@ -1,15 +1,15 @@
 package com.example.JPA_Springboot.user.dto;
 
 public class UserRequestDto {
-    private String naem;
+    private String name;
     private int age;
 
-    public String getNaem() {
-        return naem;
+    public String getName() {
+        return name;
     }
 
-    public void setNaem(String naem) {
-        this.naem = naem;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {

@@ -5,7 +5,7 @@ import com.example.JPA_Springboot.user.dto.UserResponseDto;
 import com.example.JPA_Springboot.user.entity.User;
 import org.mapstruct.*;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
     // toEntity
     User toEntity(UserRequestDto userRequestDto);

@@ -2,20 +2,20 @@ package com.example.JPA_Springboot.user.dto;
 
 public class UserResponseDto {
 
-    public UserResponseDto(String naem, int age) {
-        this.naem = naem;
+    public UserResponseDto(String name, int age) {
+        this.name = name;
         this.age = age;
     }
 
-    private String naem;
+    private String name;
     private int age;
 
-    public String getNaem() {
-        return naem;
+    public String getName() {
+        return name;
     }
 
-    public void setNaem(String naem) {
-        this.naem = naem;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {
